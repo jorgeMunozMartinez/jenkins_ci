@@ -3,7 +3,7 @@ pipeline{
  stages{
   stage('build'){
     steps{
-      sh "echo fdfds"
+      sh "echo fdfdsdas"
     }
   }
  }
