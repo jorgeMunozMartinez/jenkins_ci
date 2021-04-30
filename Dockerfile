@@ -1,7 +1,7 @@
-FROM python:3.7-alpine
+FROM python:3
 
-RUN pip install requests
+ADD my_script.py /
 
-COPY hello_there.py /
+RUN pip install pystrich
 
-CMD [ "python", "hello_there.py"]
+CMD [ "python", "./my_script.py" ]
