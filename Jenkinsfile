@@ -5,14 +5,14 @@ pipeline {
     stage("build") {
       steps {
         sh """
-          docker build -t hello_there .
+          docker build -t script .
         """
       }
     }
     stage("run") {
       steps {
         sh """
-          docker run --rm hello_there
+          docker run --rm script
         """
       }
     }
