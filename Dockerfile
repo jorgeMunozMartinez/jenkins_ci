@@ -1,3 +1,5 @@
-FROM php:7-fpm
-ADD script.sh /
-ENTRYPOINT ["/bin/bash", "/script.sh"]
+RUN mkdir -p /scripts
+COPY script.sh /scripts
+WORKDIR /scripts
+RUN chmod +x script.sh
+RUN script.sh
