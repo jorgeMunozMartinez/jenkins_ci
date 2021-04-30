@@ -2,6 +2,6 @@ FROM python:3.7-alpine
 
 RUN pip install requests
 
-COPY script.py /
+COPY script.py .
 
-CMD [ "python", "script.py"]
+CMD [ "python", "./script.py"]
