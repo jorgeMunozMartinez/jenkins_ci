@@ -26,14 +26,14 @@ pipeline {
       emailext (
           subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
             body: "La build de ${env.BUILD_URL} se ha completado",
-            to: "jmunozmar@minsait.com"
+            to: "Jorge.Munoz9@alu.uclm.es"
        )
     }
     failure{
         emailext (
           subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
             body: "La build de ${env.BUILD_URL} ha fallado",
-            to: "jmunozmar@minsait.com"
+            to: "Jorge.Munoz9@alu.uclm.es"
        )
     }
   }
