@@ -13,6 +13,7 @@ pipeline {
     stage("test"){
       steps {
         script{
+          sh "sudo apt install python-pip"
           sh "sudo pip install flake8 pytest pytest-cov"
           sh "pytest pruebas.py"
         }
