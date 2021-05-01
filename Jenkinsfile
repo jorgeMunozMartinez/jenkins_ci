@@ -4,12 +4,12 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        sh "sudo docker build -t hello_there ."
+        sh "sudo -S admin docker build -t hello_there ."
       }
     }
     stage("run") {
       steps {
-        sh "sudo docker run --rm hello_there"
+        sh "sudo -S admin docker run --rm hello_there"
       }
     }
   }
