@@ -17,7 +17,7 @@ pipeline {
         }
       }
     }
-   /* stage("build") {
+    stage("build") {
       steps {
         sh "echo 2845 | sudo -S docker build -t python_script . "
       }
@@ -26,9 +26,9 @@ pipeline {
       steps {
         sh "echo 2845 | sudo -S docker build -t python_script . "
       }
-    }*/
+    }
   }
-  /*post{
+  post{
     success{
       emailext (
           subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
@@ -43,5 +43,5 @@ pipeline {
             to: "Jorge.Munoz9@alu.uclm.es"
        )
     }
-  }*/
+  }
 }
