@@ -10,7 +10,15 @@ pipeline {
         }
       }
     }
-    stage("build") {
+    stage("test"){
+      steps {
+        script{
+          sh "pip install flake8 pytest pytest-cov"
+          sh "pytest pruebas.py"
+        }
+      }
+    }
+   /* stage("build") {
       steps {
         sh "echo 2845 | sudo -S docker build -t python_script . "
       }
@@ -19,7 +27,7 @@ pipeline {
       steps {
         sh "echo 2845 | sudo -S docker build -t python_script . "
       }
-    }
+    }*/
   }
   post{
     success{
