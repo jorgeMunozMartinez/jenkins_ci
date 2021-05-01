@@ -94,15 +94,15 @@ Para enviar un correo electrónico usando los métodos **Post** de jenkisn se de
 
 ![](capturas/email.png)
 
-Para este caso se usa un correo electrónico creado para otra asiganura ya configurado para permitir el acceso a aplicaciones menos seguras.
+Para este caso se usa un correo electrónico creado para otra asignatura ya configurado para permitir el acceso a aplicaciones menos seguras.
 
-Tanto si la build falla o se completa correctamente llegará un mesaje al correo definido en el pipeline indicando el resultado. 
+Tanto si la build falla o se completa correctamente llegará un mensaje al correo definido en el pipeline indicando el resultado.
 
 ![](capturas/email2.png)
 
 ## Arquitectura TI
 
-La idea es que cuando una persona realice un push de código a GitHub, se debe triggerear un Job en Jenkins que ejecute una sere de pasos donde se cree una imagen Docker. En esa imagen se ejecuta un script python, poteriomente se debe publicar la imagen Docker.
+La idea es que cuando una persona realice un push de código a GitHub, se debe triggerear un Job en Jenkins que ejecute una serie de pasos donde se cree una imagen Docker. En esa imagen se ejecuta un script python, posteriormente se debe publicar la imagen Docker.
 
 ![](capturas/arq.png)
 
@@ -112,11 +112,26 @@ La idea es que cuando una persona realice un push de código a GitHub, se debe t
 
 - Cuando se activa el Job se recorren todos los repositorio en busca del Jenkinsfile.
 
-- Posteriomente se se decarga el repositorio Git en el Workspace de Jenkins y comienza la ejecución siguiendo los pasos definidos en el Jenkisnfile
-```groovy
+- Posteriormente se se descarga el repositorio Git en el Workspace de Jenkins y comienza la ejecución siguiendo los pasos definidos en el Jenkisnfile
+```python
+def gitRepoName
 pipeline {
-    agent { label "master" }
+    agent any
     stages {
+      stage("init"){
+        steps {
+          script{
+            gitRepoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+          }
+        }
+      }
+      stage("test"){
+        steps {
+          script{
+            sh "pytest pruebas.py"
+          }
+        }
+      }
       stage("build") {
         steps {
           sh "echo 2845 | sudo -S docker build -t python_script . "
@@ -128,20 +143,55 @@ pipeline {
         }
       }
     }
+    post{
+      success{
+        emailext (
+            subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
+              body: "La build de ${env.BUILD_URL} se ha completado",
+              to: "Jorge.Munoz9@alu.uclm.es"
+         )
+      }
+      failure{
+          emailext (
+            subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
+              body: "La build de ${env.BUILD_URL} ha fallado",
+              to: "Jorge.Munoz9@alu.uclm.es"
+         )
+      }
+    }
 }
 ```
-En este caso solo crear y publica una imagen Docker de la rama **master**. Para crear y publicar la imagen Docker, fué necesario asiganar permisos de super usuario al **usuario jenkins** y se le asignó la **contraseña 2845**.
+En este caso se realizan pruebas definidas en el archivo **pruebas.py** sobre el archivo **script.py**. Si las pruebas son satisfactorias se crear y se publica la imagen Docker del archivo pruebas.py. Fué necesario asignar permisos de súper usuario al **usuario jenkins** y se le asignó la **contraseña 2845**.
+
+- Para realizar las pruebas pertinentes se ha creado el archivo **pruebas.py**
+```python
+#!/usr/bin/env python3
+import script
+class Tests:
+    def test_connection(self):
+        assert 'uclm' == script.check('http://www.uclm.es')
+```
 
 - Para crear la imagen Docker se necesita de un archivo llamado **Dockerfile**
-```groovy
+```
 FROM python:3.7-alpine
 RUN pip install requests
 COPY script.py /
 CMD [ "python", "script.py"]
 ```
 En esta caso se va a ejecutar el archivo **script.py**, para ello se usa **python:3.7-alpine**, se instalan los paquetes necesarios, se copia el archivo script.py en la ruta de trabajo de Jenkins, por último se ejecuta con python el archivo script.py
-- El archivo **script.py** es un script simple de python
+- El archivo **script.py** es un script simple de python. Donde se comprueba si existe conexión con la UCLM
 ```python
+#!/usr/bin/env python3
+import requests
+def check(url):
+   x = requests.get(url)
+   if x.status_code == 200:
+     print('uclm')
+     return 'uclm'
+   else:
+     print('no uclm')
+     return 'no uclm'
 ```
 - Tras la ejecución de del Jenkins pipeline se debe de haber creado y publicado una imagen Docker. Mediante el comando **sudo docker images --all** se puede ver las imágenes de Docker
 ![](capturas/jenkins3.png)
