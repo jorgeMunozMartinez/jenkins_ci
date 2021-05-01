@@ -4,4 +4,4 @@ import hello_there
 class Tests:
 
     def test_addition(self):
-        assert 'yay!' == hello_there.check('www.uclm.es')
+        assert 'uclm' == hello_there.check('www.uclm.es')
