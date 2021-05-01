@@ -2,7 +2,7 @@
 pipeline {
   agent { label "master" }
   stages {
-    stage("build") {
+    /*stage("build") {
       steps {
         sh "echo 2845 | sudo -S docker build -t hello_there . "
       }
@@ -11,6 +11,6 @@ pipeline {
       steps {
         sh "echo 2845 | sudo -S docker build -t hello_there . "
       }
-    }
+    }*/
   }
 }
