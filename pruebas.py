@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import hello_there
+import script
 
 class Tests:
 
     def test_addition(self):
-        assert 'uclm' == hello_there.check('www.uclm.es')
+        assert 'uclm' == script.check('www.uclm.es')
 
