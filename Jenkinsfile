@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        sh "echo admin | sudo -S ls admin docker build -t hello_there ."
+        sh "echo 2845 | sudo -S ls admin docker build -t hello_there ."
       }
     }
     stage("run") {
