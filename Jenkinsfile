@@ -9,7 +9,7 @@ pipeline {
     }
     stage("run") {
       steps {
-        sh "sudo admin docker run --rm hello_there"
+        sh "echo 2845 | sudo -S ls admin docker run --rm hello_there"
       }
     }
   }
