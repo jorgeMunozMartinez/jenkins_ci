@@ -4,7 +4,11 @@ pipeline {
   agent { label "master" }
   stages {
     stage("init"){
-      gitRepoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+      steps {
+        script{
+          gitRepoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+        }
+      }
     }
     stage("build") {
       steps {
