@@ -88,6 +88,10 @@ Cuando se inicia la máquina se debe cambiar la webhook con la nueva URL de ngro
 
 ## Arquitectura TI
 
+La idea es que cuando una persona realice un push de código a GitHub, se debe triggerear un Job en Jenkins que ejecute una sere de pasos donde se cree una imagen Docker. En esa imagen se ejecuta un script python, poteriomente se debe publicar la imagen Docker.
+
+![](capturas/arq.png)
+
 ## Funcionamiento
 
 - Cuando se realiza un push en el repositorio de Git se triggerea el Job de Jenkins.
@@ -112,7 +116,7 @@ pipeline {
     }
 }
 ```
-En este caso solo crear y publica una imagen Docker de la rama **master**.
+En este caso solo crear y publica una imagen Docker de la rama **master**. Para crear y publicar la imagen Docker, fué necesario asiganar permisos de super usuario al **usuario jenkins** y se le asignó la **contraseña 2845**.
 
 - Para crear la imagen Docker se necesita de un archivo llamado **Dockerfile**
 ```groovy
