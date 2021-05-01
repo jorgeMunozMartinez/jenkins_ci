@@ -86,6 +86,16 @@ http://293ce6b50e0f.ngrok.io/multibranch-webhook-trigger/invoke?token=jenkins_ci
 
 Cuando se inicia la máquina se debe cambiar la webhook con la nueva URL de ngrok.
 
+Para enviar un correo electrónico usando los métodos **Post** de jenkisn se debe configurar el apartado **Extended E-mail Notification** de la configuración, e incluir:
+- SMTP Server
+- SMTP Port
+- SMTP Username
+- SMTP Password
+
+![](capturas/email.png)
+
+Para este caso se usa un correo electrónico creado para otra asiganura ya configurado para permitir el acceso a aplicaciones menos seguras.
+
 ## Arquitectura TI
 
 La idea es que cuando una persona realice un push de código a GitHub, se debe triggerear un Job en Jenkins que ejecute una sere de pasos donde se cree una imagen Docker. En esa imagen se ejecuta un script python, poteriomente se debe publicar la imagen Docker.
