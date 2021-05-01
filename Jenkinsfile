@@ -1,7 +1,7 @@
 
 pipeline {
   agent { label "master" }
-  stages {
+  /*stages {
     stage("build") {
       steps {
         sh "echo 2845 | sudo -S docker build -t python_script . "
@@ -12,5 +12,5 @@ pipeline {
         sh "echo 2845 | sudo -S docker build -t python_script . "
       }
     }
-  }
+  }*/
 }
