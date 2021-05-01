@@ -1,5 +1,4 @@
-
-/*def gitRepoName
+def gitRepoName
 pipeline {
   agent { label "master" }
   stages {
