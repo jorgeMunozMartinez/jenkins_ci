@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
+import hello_there
 
-import requests
+class Tests:
 
-def check(url):
-   x = requests.get(url)
+    def test_addition(self):
+        assert 'uclm' == hello_there.check('www.uclm.es')
 
-   if x.status_code == 200:
-     print('uclm')
-     return 'uclm'
-   else:
-     print('no uclm')
-     return 'no uclm'
