@@ -13,8 +13,8 @@ pipeline {
     stage("test"){
       steps {
         script{
-          sh "sudo apt install python-pip"
-          sh "sudo pip install flake8 pytest pytest-cov"
+          sh "echo 2845 | sudo -S sudo apt install python3-pip"
+          sh "echo 2845 | sudo -S sudo pip3 install flake8 pytest pytest-cov"
           sh "pytest pruebas.py"
         }
       }
@@ -30,7 +30,7 @@ pipeline {
       }
     }*/
   }
-  post{
+  /*post{
     success{
       emailext (
           subject: "Fallo en la pipeline del proyecto: ${gitRepoName}",
@@ -45,5 +45,5 @@ pipeline {
             to: "Jorge.Munoz9@alu.uclm.es"
        )
     }
-  }
+  }*/
 }
