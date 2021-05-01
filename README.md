@@ -96,6 +96,10 @@ Para enviar un correo electrónico usando los métodos **Post** de jenkisn se de
 
 Para este caso se usa un correo electrónico creado para otra asiganura ya configurado para permitir el acceso a aplicaciones menos seguras.
 
+Tanto si la build falla o se completa correctamente llegará un mesaje al correo definido en el pipeline indicando el resultado. 
+
+![](capturas/email2.png)
+
 ## Arquitectura TI
 
 La idea es que cuando una persona realice un push de código a GitHub, se debe triggerear un Job en Jenkins que ejecute una sere de pasos donde se cree una imagen Docker. En esa imagen se ejecuta un script python, poteriomente se debe publicar la imagen Docker.
