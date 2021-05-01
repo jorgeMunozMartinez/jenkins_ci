@@ -4,12 +4,12 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        sh "sudo -S 2845 docker build -t hello_there ."
+        sh "echo 2845 | sudo -S docker build -t hello_there . "
       }
     }
     stage("run") {
       steps {
-        sh "sudo -S 2845 docker run --rm hello_there"
+        sh "echo 2845 | sudo -S docker build -t hello_there . "
       }
     }
   }
