@@ -3,6 +3,6 @@ import script
 
 class Tests:
 
-    def test_addition(self):
+    def test_connection(self):
         assert 'uclm' == script.check('http://www.uclm.es')
 
