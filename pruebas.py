@@ -4,5 +4,5 @@ import script
 class Tests:
 
     def test_addition(self):
-        assert 'uclm' == script.check('www.uclm.es')
+        assert 'uclm' == script.check('http://www.uclm.es')
 
