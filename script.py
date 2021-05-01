@@ -1,3 +1,7 @@
 #!/usr/bin/env python3
+import hello_there
 
-print ('Script de python')
+class Tests:
+
+    def test_addition(self):
+        assert 'yay!' == hello_there.check('www.uclm.es')
