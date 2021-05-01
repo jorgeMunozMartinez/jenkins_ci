@@ -1,6 +1,6 @@
 def gitRepoName
 pipeline {
-  agent { label "master" }
+  agent any
   stages {
     stage("init"){
       steps {
